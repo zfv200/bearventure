@@ -3,8 +3,19 @@
 	margin: 0;
 }
 
-canvas {
-	background: #eee;
-	display: block;
-	margin: 0 auto;
+#game {
+	background-color: rgba(0, 255, 0, 0.5);
+ 	height: 600px;
+  	margin: 0 auto;
+  	position: relative;
+  	text-align: center;
+  	width: 600px;
+}
+
+#start-button {
+  color: green;
+  font-size: 4rem;
+  text-decoration: none;
+  text-align: center;
+  top: 4rem;
 }
