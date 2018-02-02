@@ -11,10 +11,43 @@ const down_arrow = 40
 
 
 
-
 function startGame() {
-	window.addEventListener('keydown', movePlayer)
+	window.addEventListener('keydown', movePlayer);
+	moveEnemyDown();
 }
+
+function moveEnemyRight() {
+	var pos = 560;
+	var interval = setInterval(frame, 10);
+	function frame() {
+		if (pos == 0) {
+			moveEnemyDown()
+			clearInterval(interval);
+		} else {
+			pos--;
+			enemy.style.top = pos + 'px';
+			enemy.style.left = pos + 'px';
+		}
+	}
+
+};
+
+function moveEnemyDown() {
+	var pos = 0;
+	var interval = setInterval(frame, 10);
+	function frame() {
+		if (pos == 560) {
+			moveEnemyRight();
+			clearInterval(interval)
+		} else {
+			pos++;
+			enemy.style.top = pos + 'px';
+			enemy.style.left = pos + 'px';
+		}
+	}
+
+};
+
 
 function movePlayer(event) {
 	const key = event.which
@@ -76,6 +109,4 @@ $(document).ready(function() {
     $('#start-button').on('click', function() {
     	$(this).fadeOut();
     });
-
-
 });
