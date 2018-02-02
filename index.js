@@ -1,19 +1,25 @@
-var canvas = document.getElementById("my-canvas");
-var ctx = canvas.getContext("2d");
-var bear = new Image();
-bear.src = ""
+const start = document.getElementById('start-button')
+const player = document.getElementById('player')
+const enemy = document.getElementById('enemy')
+const game = document.getElementById('game')
+const game_height = 600
+const game_width = 600
+const left_arrow = 37
+const right_arrow = 39
+const up_arrow = 38
+const down_arrow = 40
 
 
-function addBear() {
-bear.addEventListener('load', function() {
-	ctx.drawImage(bear, 100, 400)
-	})
+
+
+function startGame() {
+
 }
 
-addBear();
 
-// ctx.beginPath();
-// ctx.rect(20, 40, 50, 50);
-// ctx.fillStyle = "#FF0000";
-// ctx.fill();
-// ctx.closePath();
+
+$(document).ready(function() {
+    $('#start-button').on('click', function() {
+    	$(this).fadeOut();
+    });
+});
