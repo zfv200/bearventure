@@ -13,7 +13,61 @@ const down_arrow = 40
 
 
 function startGame() {
+	window.addEventListener('keydown', movePlayer)
+}
 
+function movePlayer(event) {
+	const key = event.which
+
+	if (key === left_arrow) {
+		movePlayerLeft();
+	} else if (key === right_arrow) {
+		movePlayerRight();
+	} else if (key === up_arrow) {
+		movePlayerUp();
+	} else if (key === down_arrow) {
+		movePlayerDown();
+	}
+}
+
+function movePlayerLeft() {
+window.requestAnimationFrame(function() {
+	var left = parseInt(player.style.left)
+
+	if (left > 0) {
+		player.style.left = `${left - 4}px`
+		}
+	});
+}
+
+function movePlayerRight() {
+window.requestAnimationFrame(function() {
+	var left = parseInt(player.style.left)
+
+	if (left < 560) {
+		player.style.left = `${left + 4}px`
+		}
+	});
+}
+
+function movePlayerUp() {
+window.requestAnimationFrame(function() {
+	var top = parseInt(player.style.top)
+
+	if (top > 0) {
+		player.style.top = `${top - 4}px`
+		};
+	});
+};
+
+function movePlayerDown() {
+window.requestAnimationFrame(function() {
+	var top = parseInt(player.style.top)
+
+	if (top < 580) {
+		player.style.top = `${top + 4}px`
+	}
+})
 }
 
 
@@ -22,4 +76,6 @@ $(document).ready(function() {
     $('#start-button').on('click', function() {
     	$(this).fadeOut();
     });
+
+
 });
