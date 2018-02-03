@@ -26,9 +26,9 @@ function produceHoney(x) {
 	position = Math.floor(Math.random() * Math.floor(560))
 
 	honey.id = 'honey'
-	honey.style.right = `${position}px`
-	honey.style.top = `${position}px`
-	honey.style.left = `${position}px`
+	// honey.style.right = `${position}px`
+	honey.style.top = `${Math.floor(Math.random() * Math.floor(560))}px`
+	honey.style.left = `${Math.floor(Math.random() * Math.floor(560))}px`
 	honey.style.height = "20px"
 	honey.style.width = "40px"
 	honey.style.color = "yellow"
@@ -45,16 +45,13 @@ function getHoney() {
 
 	const playerLeftEdge = parseInt(player.style.left);
 	const playerRightEdge = playerLeftEdge + 40;
-	// const honeyLeftEdge = parseInt(honey_piece.style.left) + 20;
-	// const honeyRightEdge = honeyLeftEdge + 40;
+	const playerTop = parseInt(player.style.top);
 
-	const honeyCenterLeft = parseInt(honey_piece.style.right)
-	const honeyCenterRight = parseInt(honey_piece.style.right)
+	const honeyPositionRight = parseInt(honey_piece.style.left) + 30
 	const honeyTop = parseInt(honey_piece.style.top)
-	const honeyBottom = parseInt(honey_piece.style.top) - 20
 
 
-	if (playerLeftEdge <= honeyCenterRight) {
+	if (playerLeftEdge <= honeyPositionRight && playerTop >= honeyTop) {
 		console.log('true')
 		produceHoney();
 	}
