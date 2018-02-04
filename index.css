@@ -16,6 +16,14 @@ html {
   	width: 600px;
 }
 
+#counter {
+	height: 50px;
+	width: 100px;
+	text-align: right;
+	position: relative;
+	margin: 0 auto;
+}
+
 #start-button {
 	color: green;
 	font-size: 4rem;
@@ -40,9 +48,13 @@ html {
 
 #honey {
 	background-color: yellow;
-	width: 30px;
-	height: 30px;
-	border-radius: 50%;
+/*	width: 60px;
+	height: 60px;*/
 	position: absolute;
+}
+
+p {
+	text-align: center;
+	font-size: 40px;
 }
 

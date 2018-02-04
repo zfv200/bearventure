@@ -9,6 +9,7 @@ const right_arrow = 39
 const up_arrow = 38
 const down_arrow = 40
 const honey = []
+const score = document.getElementById('score')
 
 
 
@@ -29,8 +30,8 @@ function produceHoney(x) {
 	// honey.style.right = `${position}px`
 	honey.style.top = `${Math.floor(Math.random() * Math.floor(560))}px`
 	honey.style.left = `${Math.floor(Math.random() * Math.floor(560))}px`
-	honey.style.height = "20px"
-	honey.style.width = "40px"
+	honey.style.height = "60px"
+	honey.style.width = "60px"
 	honey.style.color = "yellow"
 
 	game.appendChild(honey)
@@ -42,17 +43,22 @@ function produceHoney(x) {
 function getHoney() {
 	// const top = parseInt(honey.style.top);
 	const honey_piece = document.getElementById('honey')
+	var score = document.getElementById('score')
+
 
 	const playerLeftEdge = parseInt(player.style.left);
 	const playerRightEdge = playerLeftEdge + 40;
 	const playerTop = parseInt(player.style.top);
 
 	const honeyPositionRight = parseInt(honey_piece.style.left) + 30
+	const honeyPositionLeft = parseInt(honey_piece.style.left)
 	const honeyTop = parseInt(honey_piece.style.top)
+	const honeyBottom = parseInt(honey_piece.style.top) + 30
 
 
-	if (playerLeftEdge <= honeyPositionRight && playerTop >= honeyTop) {
-		console.log('true')
+	if (playerLeftEdge <= honeyPositionRight && playerTop <= honeyTop) {
+		score.innerText = parseInt(score.innerText) += 1
+		game.removeChild(honey_piece)
 		produceHoney();
 	}
 }
