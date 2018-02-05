@@ -27,11 +27,12 @@ function produceHoney(x) {
 	position = Math.floor(Math.random() * Math.floor(560))
 
 	honey.id = 'honey'
+	honey.className = 'honey-image'
 	// honey.style.right = `${position}px`
 	honey.style.top = `${Math.floor(Math.random() * Math.floor(560))}px`
 	honey.style.left = `${Math.floor(Math.random() * Math.floor(560))}px`
-	honey.style.height = "60px"
-	honey.style.width = "60px"
+	honey.style.height = "30px"
+	honey.style.width = "30px"
 	honey.style.color = "yellow"
 
 	game.appendChild(honey)
@@ -46,9 +47,10 @@ function getHoney() {
 	var score = document.getElementById('score')
 
 
-	const playerLeftEdge = parseInt(player.style.left);
-	const playerRightEdge = playerLeftEdge + 40;
-	const playerTop = parseInt(player.style.top);
+	const playerLeftEdge = parseInt(player.style.left) - 6;
+	const playerRightEdge = playerLeftEdge + 50;
+	const playerTop = parseInt(player.style.top) - 8;
+	const playerBottom = parseInt(player.style.top) + 26
 
 	const honeyPositionRight = parseInt(honey_piece.style.left) + 30
 	const honeyPositionLeft = parseInt(honey_piece.style.left)
@@ -56,8 +58,9 @@ function getHoney() {
 	const honeyBottom = parseInt(honey_piece.style.top) + 30
 
 
-	if (playerLeftEdge <= honeyPositionRight && playerTop <= honeyTop) {
-		score.innerText = parseInt(score.innerText) += 1
+	if (playerLeftEdge <= honeyPositionRight && playerRightEdge >= honeyPositionLeft && 
+		(playerTop <= honeyBottom && playerBottom >= honeyTop)) {
+		score.innerText++
 		game.removeChild(honey_piece)
 		produceHoney();
 	}
@@ -157,3 +160,5 @@ $(document).ready(function() {
     	$(this).fadeOut();
     });
 });
+
+

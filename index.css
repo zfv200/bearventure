@@ -8,7 +8,7 @@ html {
 }
 
 #game {
-	background-color: rgba(0, 255, 0, 0.5);
+	background-color: rgba(34,139,34, 0.7);
  	height: 600px;
   	margin: 0 auto;
   	position: relative;
@@ -56,5 +56,13 @@ html {
 p {
 	text-align: center;
 	font-size: 40px;
+}
+
+.honey-image {
+	background-image: url('https://css.rglcdn.com/imagecache/RG/images/pageimg/integral/points.gif');
+}
+
+.bear-image {
+	background-image: url('https://orig00.deviantart.net/bad0/f/2013/239/e/e/spore_creature___grizzly_bear_png_by_tote_meistarinn-d6jxtjw.png');
 }
 
