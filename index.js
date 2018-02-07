@@ -12,9 +12,14 @@ const score = document.getElementById('score')
 const enemy_piece = document.getElementById('enemy')
 const honey_piece = document.getElementById('honey')
 const instructions = document.getElementById('instructions')
+const grizzly = document.getElementById('grizzly')
 
 
 function startGame() {
+	player.style.display = "block"
+	player.style.left = "280px"
+	player.style.top = "300px"
+	grizzly.style.display = "none"
 	score.innerText = 0;
 	window.addEventListener('keydown', movePlayer);
   gameInterval = setInterval(function() {
@@ -24,6 +29,8 @@ function startGame() {
 }
 
 function endGame() {
+	player.style.display = "none"
+	grizzly.style.display = "block"
 	clearInterval(gameInterval)
 	var end_button = document.getElementById('end-button');
 	end_button.style.display = "block";
