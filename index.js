@@ -1,6 +1,6 @@
 const start = document.getElementById('start-button')
 const player = document.getElementById('player')
-const enemy = document.getElementById('enemy')
+// const enemy = document.getElementById('enemy')
 const game = document.getElementById('game')
 const game_height = 600
 const game_width = 600
@@ -8,15 +8,27 @@ const left_arrow = 37
 const right_arrow = 39
 const up_arrow = 38
 const down_arrow = 40
-const honey = []
+const enemies = []
 const score = document.getElementById('score')
-
+const enemy_piece = document.getElementById('enemy')
+const honey_piece = document.getElementById('honey')
 
 
 function startGame() {
 	window.addEventListener('keydown', movePlayer);
-	moveEnemyDown();
+  gameInterval = setInterval(function() {
+    createEnemy(Math.floor(Math.random() *  (600 - 20)))
+  }, 1000)
 	produceHoney();
+}
+
+function endGame() {
+	clearInterval(gameInterval)
+	var end_button = document.getElementById('end-button');
+	end_button.style.display = "block";
+  	enemies.forEach(function(enemy) {enemy.remove() });
+  	honey.remove();
+  	window.removeEventListener('keydown', movePlayer);
 }
 
 //maybe would be better to create a grid, and then place it randomly on one of the grids
@@ -27,9 +39,11 @@ function produceHoney(x) {
 	position = Math.floor(Math.random() * Math.floor(560))
 
 	honey.id = 'honey'
+	honey_height = 300
 	honey.className = 'honey-image'
 	// honey.style.right = `${position}px`
-	honey.style.top = `${Math.floor(Math.random() * Math.floor(560))}px`
+	honey.style.top = "300px"
+	honey.style.top = `${Math.floor(Math.random() * (570 - 300)) + 300}px`
 	honey.style.left = `${Math.floor(Math.random() * Math.floor(560))}px`
 	honey.style.height = "30px"
 	honey.style.width = "30px"
@@ -50,7 +64,7 @@ function getHoney() {
 	const playerLeftEdge = parseInt(player.style.left) - 6;
 	const playerRightEdge = playerLeftEdge + 50;
 	const playerTop = parseInt(player.style.top) - 8;
-	const playerBottom = parseInt(player.style.top) + 26
+	const playerBottom = parseInt(player.style.top) + 46
 
 	const honeyPositionRight = parseInt(honey_piece.style.left) + 30
 	const honeyPositionLeft = parseInt(honey_piece.style.left)
@@ -59,43 +73,107 @@ function getHoney() {
 
 
 	if (playerLeftEdge <= honeyPositionRight && playerRightEdge >= honeyPositionLeft && 
-		(playerTop <= honeyBottom && playerBottom >= honeyTop)) {
+		(playerTop <= honeyBottom && playerBottom >= honeyTop))  {
 		score.innerText++
 		game.removeChild(honey_piece)
 		produceHoney();
 	}
 }
 
-function moveEnemyLeft() {
-	var pos = 560;
-	var interval = setInterval(frame, 5);
-	function frame() {
-		if (pos == 0) {
-			moveEnemyDown();
-			clearInterval(interval);
-		} else {
-			pos--;
-			enemy.style.top = pos + 'px';
-			enemy.style.left = pos + 'px';
-		}
-	}
-};
+function enemyCollide(enemy) {
+	const playerLeft = parseInt(player.style.left);
+	const playerRight = playerLeft + 40;
+	const playerT = parseInt(player.style.top);
 
-function moveEnemyDown() {
-	enemy.style.top = 40
-	var pos = 0;
-	var interval = setInterval(frame, 5);
-	function frame() {
-		if (pos == 560) {
-			moveEnemyLeft();
-			clearInterval(interval)
-		} else {
-			pos ++;
-			enemy.style.top = pos + 'px';
-			enemy.style.left = pos + 'px';
-		}
+	const enemyBottom = parseInt(enemy.style.top) + 38
+	const enemyLeft = parseInt(enemy.style.left)
+	const enemyRight = parseInt(enemyLeft) + 40
+
+	if (enemyBottom >= playerT && enemyLeft <= playerRight && enemyRight <= playerRight + 38
+		&& enemyRight >= playerLeft && enemyBottom <= playerT)
+		return true
 	}
-};
+
+
+
+
+// function moveEnemyLeft() {
+// 	var pos = 560;
+// 	var interval = setInterval(frame, 5);
+// 	function frame() {
+// 		if (pos == 0) {
+// 			moveEnemyDown();
+// 			clearInterval(interval);
+// 		} else {
+// 			pos--;
+// 			enemy.style.top = pos + 'px';
+// 			enemy.style.left = pos + 'px';
+// 		}
+// 	}
+// };
+
+
+
+// function moveEnemyDown() {
+// 	const enemy = document.createElement('div')
+// 	var pos = Math.floor(Math.random() * Math.floor(560))
+// 	var top = 0
+// 	enemy.style.left = pos
+// 	enemy.style.top = 0
+// 	enemy.id = enemy
+
+// 	game.appendChild(enemy)
+
+// 	function moveEnemy() {
+// 	  enemy.style.top = `${top += 3}px`
+// 	if (parseInt(enemy.style.top) < 600) {
+// 		window.requestAnimationFrame(moveEnemy)
+// 	} else {
+// 	   enemy.remove();
+// 	}
+//   }
+//   window.requestAnimationFrame(moveEnemy)
+//   enemies.push(enemy)
+
+//   return enemy
+// };
+
+function createEnemy(x) {
+  const enemy = document.createElement('div')
+
+  enemy.id = 'enemy'
+  var top = 0
+  var pos = Math.floor(Math.random() * Math.floor(560))
+
+  enemy.style.left = `${pos}px`
+
+  enemy.style.top = top
+
+  game.appendChild(enemy)
+
+  function moveEnemy() {
+    enemy.style.top = `${top += 2}px`;
+
+    if (enemyCollide(enemy)) {
+      console.log('working')
+      endGame();
+    }
+
+    if (top < 560) {
+      window.requestAnimationFrame(moveEnemy)
+    } else {
+      enemy.remove()
+    }
+  }
+
+  window.requestAnimationFrame(moveEnemy)
+
+  enemies.push(enemy)
+
+  return enemy
+}
+
+
 
 
 function movePlayer(event) {
@@ -159,6 +237,10 @@ $(document).ready(function() {
     $('#start-button').on('click', function() {
     	$(this).fadeOut();
     });
+
+    $('#end-button').on('click', function() {
+    	$(this).fadeOut();
+    })
 });
 
 

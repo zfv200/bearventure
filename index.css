@@ -1,4 +1,4 @@
-* {
+	* {
 	padding: 0;
 	margin: 0;
 }
@@ -25,29 +25,38 @@ html {
 }
 
 #start-button {
-	color: green;
+	color: yellow;
 	font-size: 4rem;
 	text-decoration: none;
 	text-align: center;
-  	top: 4rem;
+}
+
+#end-button {
+	color: yellow;
+	font-size: 4rem;
+	text-decoration: none;
+	text-align: center;
+  	
 }
 
 #player {
-	background-color: white;
+	background-color: rgba(252, 252, 252, 0.0);
 	width: 40px;
 	position: absolute;
 }
 
+
 #enemy {
-	background-color: red;
+	background-color: rgba(0, 0, 0, 0);
 	width: 40px;
 	height: 40px;
 	border-radius: 50%;
 	position: absolute;
+	background-image: url('file:///Users/zacharyvary/dev/bearventure/images/hunter_1_40x40.png');
 }
 
 #honey {
-	background-color: yellow;
+	background-color: rgba(255,255,11,0.0);
 /*	width: 60px;
 	height: 60px;*/
 	position: absolute;
@@ -58,11 +67,12 @@ p {
 	font-size: 40px;
 }
 
+
+
 .honey-image {
-	background-image: url('https://css.rglcdn.com/imagecache/RG/images/pageimg/integral/points.gif');
+	background-image: url('file:///Users/zacharyvary/dev/bearventure/images/honey_1_30x30.png');
 }
 
 .bear-image {
-	background-image: url('https://orig00.deviantart.net/bad0/f/2013/239/e/e/spore_creature___grizzly_bear_png_by_tote_meistarinn-d6jxtjw.png');
 }
 
