@@ -36,7 +36,12 @@ html {
 	font-size: 4rem;
 	text-decoration: none;
 	text-align: center;
-  	
+}
+
+#start-button h5 {
+	color: yellow;
+	font-size: 32px;
+	text-align: center;
 }
 
 #player {
@@ -52,7 +57,7 @@ html {
 	height: 40px;
 	border-radius: 50%;
 	position: absolute;
-	background-image: url('file:///Users/zacharyvary/dev/bearventure/images/hunter_1_40x40.png');
+	background-image: url('images/hunter_1_40x40.png');
 }
 
 #honey {
@@ -70,7 +75,7 @@ p {
 
 
 .honey-image {
-	background-image: url('file:///Users/zacharyvary/dev/bearventure/images/honey_1_30x30.png');
+	background-image: url('images/honey_1_30x30.png');
 }
 
 .bear-image {

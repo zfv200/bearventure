@@ -1,6 +1,5 @@
 const start = document.getElementById('start-button')
 const player = document.getElementById('player')
-// const enemy = document.getElementById('enemy')
 const game = document.getElementById('game')
 const game_height = 600
 const game_width = 600
@@ -12,9 +11,11 @@ const enemies = []
 const score = document.getElementById('score')
 const enemy_piece = document.getElementById('enemy')
 const honey_piece = document.getElementById('honey')
+const instructions = document.getElementById('instructions')
 
 
 function startGame() {
+	score.innerText = 0;
 	window.addEventListener('keydown', movePlayer);
   gameInterval = setInterval(function() {
     createEnemy(Math.floor(Math.random() *  (600 - 20)))
@@ -31,8 +32,6 @@ function endGame() {
   	window.removeEventListener('keydown', movePlayer);
 }
 
-//maybe would be better to create a grid, and then place it randomly on one of the grids
-//then when the player reaches the grid they attain the piece
 
 function produceHoney(x) {
 	const honey = document.createElement('div')
@@ -43,7 +42,7 @@ function produceHoney(x) {
 	honey.className = 'honey-image'
 	// honey.style.right = `${position}px`
 	honey.style.top = "300px"
-	honey.style.top = `${Math.floor(Math.random() * (570 - 300)) + 300}px`
+	honey.style.top = `${Math.floor(Math.random() * (570 - 200)) + 200}px`
 	honey.style.left = `${Math.floor(Math.random() * Math.floor(560))}px`
 	honey.style.height = "30px"
 	honey.style.width = "30px"
@@ -85,58 +84,21 @@ function enemyCollide(enemy) {
 	const playerRight = playerLeft + 40;
 	const playerT = parseInt(player.style.top);
 
-	const enemyBottom = parseInt(enemy.style.top) + 38
+	const enemyT = parseInt(enemy.style.top)
+	const enemyBottom = parseInt(enemy.style.top) + 36
 	const enemyLeft = parseInt(enemy.style.left)
 	const enemyRight = parseInt(enemyLeft) + 40
 
 	if (enemyBottom >= playerT && enemyLeft <= playerRight && enemyRight <= playerRight + 38
-		&& enemyRight >= playerLeft && enemyBottom <= playerT)
+		&& enemyRight >= playerLeft && enemyBottom <= playerT) {
+		return true
+	} else if (playerT + 20 <= enemyBottom && playerT >= enemyT - 20
+		 && playerT <= enemyBottom && playerT + 20 <= enemyBottom + 20
+		 && playerLeft <= enemyRight && playerLeft >= enemyLeft - 40) {
 		return true
 	}
+}
 
-
-
-
-// function moveEnemyLeft() {
-// 	var pos = 560;
-// 	var interval = setInterval(frame, 5);
-// 	function frame() {
-// 		if (pos == 0) {
-// 			moveEnemyDown();
-// 			clearInterval(interval);
-// 		} else {
-// 			pos--;
-// 			enemy.style.top = pos + 'px';
-// 			enemy.style.left = pos + 'px';
-// 		}
-// 	}
-// };
-
-
-
-// function moveEnemyDown() {
-// 	const enemy = document.createElement('div')
-// 	var pos = Math.floor(Math.random() * Math.floor(560))
-// 	var top = 0
-// 	enemy.style.left = pos
-// 	enemy.style.top = 0
-// 	enemy.id = enemy
-
-// 	game.appendChild(enemy)
-
-// 	function moveEnemy() {
-// 	  enemy.style.top = `${top += 3}px`
-// 	if (parseInt(enemy.style.top) < 600) {
-// 		window.requestAnimationFrame(moveEnemy)
-// 	} else {
-// 	   enemy.remove();
-// 	}
-//   }
-//   window.requestAnimationFrame(moveEnemy)
-//   enemies.push(enemy)
-
-//   return enemy
-// };
 
 function createEnemy(x) {
   const enemy = document.createElement('div')
@@ -155,7 +117,6 @@ function createEnemy(x) {
     enemy.style.top = `${top += 2}px`;
 
     if (enemyCollide(enemy)) {
-      console.log('working')
       endGame();
     }
 
@@ -234,8 +195,8 @@ window.requestAnimationFrame(function() {
 
 
 $(document).ready(function() {
-    $('#start-button').on('click', function() {
-    	$(this).fadeOut();
+    $('#start-button h3, h5').on('click', function() {
+    	$('#start-button h3, h5').fadeOut();
     });
 
     $('#end-button').on('click', function() {
