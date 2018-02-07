@@ -38,13 +38,14 @@ html {
 
 #end-button {
 	color: yellow;
-	font-size: 4rem;
+	font-size: 48px;
+	font-weight: bold;
 	text-decoration: none;
 	text-align: center;
 	z-index: 1;
 	position: absolute;
 	top: 50;
-	left: 50;
+	left: 150;
 }
 
 #start-button h5 {
