@@ -41,9 +41,9 @@ function endGame() {
   	honey.remove();
   	window.removeEventListener('keydown', movePlayer);
   	honey_score = 1
-  	if (score.innerText.match(/\d/) > high_score.innerText.match(/\d/)) {
-  		high_score.innerText = high_score.innerText.replace(high_score.innerText.match(/\d/), score.innerText.match(/\d/))
-  		top_score = score.innerText.match(/\d/)
+  	if (score.innerText.match(/\d+/) > high_score.innerText.match(/\d+/)) {
+  		high_score.innerText = high_score.innerText.replace(high_score.innerText.match(/\d+/), score.innerText.match(/\d+/))
+  		top_score = score.innerText.match(/\d+/)
   	}
 }
 
@@ -88,8 +88,8 @@ function getHoney() {
 
 	if (playerLeftEdge <= honeyPositionRight && playerRightEdge >= honeyPositionLeft && 
 		(playerTop <= honeyBottom && playerBottom >= honeyTop))  {
-		score.innerText = score.innerText.replace(score.innerText.match(/\d/), honey_score)
-		honey_score += 1
+		score.innerText = score.innerText.replace(score.innerText.match(/\d+/), honey_score)
+		honey_score++
 		game.removeChild(honey_piece)
 		produceHoney();
 	}
