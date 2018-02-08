@@ -9,18 +9,21 @@ const up_arrow = 38
 const down_arrow = 40
 const enemies = []
 const score = document.getElementById('score')
+var high_score = document.getElementById('high-score')
 const enemy_piece = document.getElementById('enemy')
 const honey_piece = document.getElementById('honey')
 const instructions = document.getElementById('instructions')
 const grizzly = document.getElementById('grizzly')
-
+var honey_score = 1
+var top_score = 0
 
 function startGame() {
+	high_score.innerText = `High Score: ${top_score}`
 	player.style.display = "block"
 	player.style.left = "280px"
 	player.style.top = "300px"
 	grizzly.style.display = "none"
-	score.innerText = 0;
+	score.innerText = "Honey: 0";
 	window.addEventListener('keydown', movePlayer);
   gameInterval = setInterval(function() {
     createEnemy(Math.floor(Math.random() *  (600 - 20)))
@@ -37,6 +40,11 @@ function endGame() {
   	enemies.forEach(function(enemy) {enemy.remove() });
   	honey.remove();
   	window.removeEventListener('keydown', movePlayer);
+  	honey_score = 1
+  	if (score.innerText.match(/\d/) > high_score.innerText.match(/\d/)) {
+  		high_score.innerText = high_score.innerText.replace(high_score.innerText.match(/\d/), score.innerText.match(/\d/))
+  		top_score = score.innerText.match(/\d/)
+  	}
 }
 
 
@@ -80,7 +88,8 @@ function getHoney() {
 
 	if (playerLeftEdge <= honeyPositionRight && playerRightEdge >= honeyPositionLeft && 
 		(playerTop <= honeyBottom && playerBottom >= honeyTop))  {
-		score.innerText++
+		score.innerText = score.innerText.replace(score.innerText.match(/\d/), honey_score)
+		honey_score += 1
 		game.removeChild(honey_piece)
 		produceHoney();
 	}
